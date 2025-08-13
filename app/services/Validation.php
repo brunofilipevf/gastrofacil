@@ -1,5 +1,11 @@
 <?php
 
+namespace App\Services;
+
+use DateTime;
+use Throwable;
+use App\Services\Database;
+
 class Validator
 {
     private $name;

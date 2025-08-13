@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Services;
+
 class CSRF
 {
     public function generate()

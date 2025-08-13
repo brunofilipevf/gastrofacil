@@ -1,5 +1,9 @@
 <?php
 
+namespace App\Controllers;
+
+use App\Models\User;
+
 class Auth
 {
     public function login()
@@ -15,7 +19,7 @@ class Auth
         validate()->name('nome de usuário')->value($data['username'])->required()->string();
         validate()->name('senha')->value($data['password'])->required()->string();
 
-        $user = $this->getUserByUsername($data['username']);
+        $user = User::getByUsername($data['username']);
         if (!$user || !password_verify($data['password'], $user['password'])) {
             flash()->danger('Credenciais inválidas ou usuário inativo.');
             return false;
@@ -55,7 +59,7 @@ class Auth
             return false;
         }
 
-        $user = $this->getUserById($userId);
+        $user = User::getById($userId);
         if (!$user) {
             $this->logout();
             return false;
@@ -72,35 +76,11 @@ class Auth
             return false;
         }
 
-        $user = $this->getUserById($userId);
+        $user = User::getById($userId);
         if (!$user || $user['level'] < $minLevel) {
             return false;
         }
 
         return true;
-    }
-
-    private function getUserByUsername($username)
-    {
-        try {
-            $stmt = Database::prepare("SELECT * FROM `users` WHERE `username` = :username AND status = 1 LIMIT 1");
-            $stmt->execute(['username' => $username]);
-            return $stmt->fetch() ?? null;
-        } catch (Throwable $e) {
-            error_log('Erro em Auth@getUserByUsername: ' . $e->getMessage());
-            return null;
-        }
-    }
-
-    private function getUserById($id)
-    {
-        try {
-            $stmt = Database::prepare("SELECT * FROM `users` WHERE `id` = :id AND status = 1 LIMIT 1");
-            $stmt->execute(['id' => $id]);
-            return $stmt->fetch() ?? null;
-        } catch (Throwable $e) {
-            error_log('Erro em Auth@getUserById: ' . $e->getMessage());
-            return null;
-        }
     }
 }

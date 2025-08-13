@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Services;
+
 class Flash
 {
     public function success($message)

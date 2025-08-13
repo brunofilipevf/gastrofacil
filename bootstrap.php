@@ -7,4 +7,4 @@ require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/settings.php';
 
 // --- Inicializar arquivo de ajudantes
-require_once __DIR__ . '/functions/helpers.php';
+require_once __DIR__ . '/app/support/helpers.php';

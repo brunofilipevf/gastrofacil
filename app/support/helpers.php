@@ -5,7 +5,7 @@ function auth()
     static $instance = null;
 
     if ($instance === null) {
-        $instance = new Auth();
+        $instance = new App\Controllers\AuthController();
     }
 
     return $instance;
@@ -16,7 +16,7 @@ function csrf()
     static $instance = null;
 
     if ($instance === null) {
-        $instance = new CSRF();
+        $instance = new App\Services\CSRF();
     }
 
     return $instance;
@@ -27,7 +27,7 @@ function flash()
     static $instance = null;
 
     if ($instance === null) {
-        $instance = new Flash();
+        $instance = new App\Services\Flash();
     }
 
     return $instance;
@@ -38,7 +38,7 @@ function validate()
     static $instance = null;
 
     if ($instance === null) {
-        $instance = new Validator();
+        $instance = new App\Services\Validator();
     }
 
     return $instance;
