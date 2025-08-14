@@ -6,6 +6,13 @@ use App\Models\User;
 
 class AuthController
 {
+    public function __construct()
+    {
+        if (session_status() !== PHP_SESSION_ACTIVE) {
+            session_start();
+        }
+    }
+
     public function login()
     {
         if (!csrf()->validate($_POST['csrf_token'])) {

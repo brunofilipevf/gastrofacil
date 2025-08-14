@@ -4,6 +4,13 @@ namespace App\Services;
 
 class CSRF
 {
+    public function __construct()
+    {
+        if (session_status() !== PHP_SESSION_ACTIVE) {
+            session_start();
+        }
+    }
+
     public function generate()
     {
         $token = $_SESSION['csrf_token'] ?? null;

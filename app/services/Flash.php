@@ -4,6 +4,13 @@ namespace App\Services;
 
 class Flash
 {
+    public function __construct()
+    {
+        if (session_status() !== PHP_SESSION_ACTIVE) {
+            session_start();
+        }
+    }
+
     public function success($message)
     {
         if (is_array($message)) {

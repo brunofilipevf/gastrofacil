@@ -46,7 +46,12 @@ class Database
 
     public static function __callStatic($method, $args)
     {
-        $pdo = self::getInstance()->pdo;
-        return call_user_func_array([$pdo, $method], $args);
+        try {
+            $pdo = self::getInstance()->pdo;
+            return call_user_func_array([$pdo, $method], $args);
+        } catch (PDOException $e) {
+            error_log('Erro de conexão com o banco de dados: ' . $e->getMessage());
+            exit('Houve um problema ao conectar com o banco de dados. Tente novamente mais tarde.');
+        }
     }
 }

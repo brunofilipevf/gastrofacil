@@ -11,6 +11,15 @@ if (auth()->isLogged()) {
     redirect()->to('index.php');
 }
 
+// --- Submeter formulário
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (auth()->login()) {
+        redirect()->to('index.php');
+    } else {
+        redirect()->back();
+    }
+}
+
 // --- Template
 $pageTitle = 'Entrar';
 
@@ -22,4 +31,9 @@ $pageTitle = 'Entrar';
     <p><?php echo e($flash['message']); ?></p>
 <?php endif; ?>
 
-<p>Página de login.</p>
+<form method="post">
+    <input type="hidden" name="csrf_token" value="<?php echo csrf()->generate(); ?>">
+    <p><input type="text" name="username" placeholder="nome de usuário"></p>
+    <p><input type="password" name="password" placeholder="senha"></p>
+    <p><button type="submit">Entrar</button></p>
+</form>
