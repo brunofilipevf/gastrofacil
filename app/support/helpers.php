@@ -44,6 +44,17 @@ function redirect()
     return $instance;
 }
 
+function user()
+{
+    static $instance = null;
+
+    if ($instance === null) {
+        $instance = new App\Controllers\UserController();
+    }
+
+    return $instance;
+}
+
 function validate()
 {
     static $instance = null;
