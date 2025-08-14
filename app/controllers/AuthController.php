@@ -4,7 +4,7 @@ namespace App\Controllers;
 
 use App\Models\User;
 
-class Auth
+class AuthController
 {
     public function login()
     {

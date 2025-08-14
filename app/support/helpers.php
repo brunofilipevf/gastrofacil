@@ -33,6 +33,17 @@ function flash()
     return $instance;
 }
 
+function redirect()
+{
+    static $instance = null;
+
+    if ($instance === null) {
+        $instance = new App\Services\Redirector();
+    }
+
+    return $instance;
+}
+
 function validate()
 {
     static $instance = null;
